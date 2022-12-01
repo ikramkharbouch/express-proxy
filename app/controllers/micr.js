@@ -1,6 +1,14 @@
 // const base64_encode = require('../util/encodefile');
 const fs = require("fs");
 
+exports.sayHello = async (req, res, next) => {
+    try{ 
+        res.status(200).json({"msg": "Server works!"})
+    } catch(error) {
+        res.status(500).json(error);
+    }
+}
+
 exports.getMicrResult = async (req, res, next) => {
   try {
     // req.file has the uploaded file

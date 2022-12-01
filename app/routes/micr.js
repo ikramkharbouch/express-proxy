@@ -5,6 +5,7 @@ const upload = multer({ dest: 'uploads/' })
 
 // CRUD endpoint
 
-router.post('/', upload.single('file'), controller.getMicrResult)
+router.get('/', controller.sayHello);
+router.post('/', upload.single('file'), controller.getMicrResult);
 
 module.exports = router;
