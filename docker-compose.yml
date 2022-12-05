@@ -14,7 +14,7 @@ services:
       - PGUSER=db_owner
       - PGPASSWORD=toor
       - PGHOST=node_db
-      - MICR_API=34.196.99.153:5000/api/
+      - MICR_API=http://34.196.99.153:5000/api/micr_result
     depends_on:
       - node_db
   node_db:

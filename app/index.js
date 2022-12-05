@@ -1,8 +1,8 @@
 const express = require("express");
-
+var fileupload = require("express-fileupload");
 const app = express();
-const sequelize = require('./util/database.js');
 
+app.use(fileupload());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
@@ -16,9 +16,6 @@ app.use('/micr', require('./routes/micr'))
 
 ;(async () => {
     try {
-        await sequelize.sync(
-            {force: false}
-        )
         app.listen(process.env.EXTERNAL_PORT || 3000);
     } catch (error) {
         console.error(error);
