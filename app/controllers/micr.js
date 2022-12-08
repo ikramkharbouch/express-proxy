@@ -1,6 +1,8 @@
 // const base64_encode = require('../util/encodefile');
 const fs = require("fs");
 const axios = require("axios");
+const MICR_RESULT = require("../models/micr");
+const { convertObjToArr, getBase64ofFile }  = require("../util/micr");
 
 exports.sayHello = async (req, res, next) => {
   try {
@@ -9,14 +11,6 @@ exports.sayHello = async (req, res, next) => {
     res.status(500).json(error);
   }
 };
-
-const getBase64ofFile = (imgFiles) => {
-  let res = JSON.parse(JSON.stringify(imgFiles));
-  const buffData = res["undefined"].data.data;
-  const encoded = Buffer.from(buffData).toString("base64");
-
-  return encoded;
-}
 
 exports.getMicrResult = async (req, res, next) => {
   try {
@@ -36,7 +30,18 @@ exports.getMicrResult = async (req, res, next) => {
         data: imgData,
       }).then((res) => res.data);
 
-      console.log("response is", response);
+      let micr_result = convertObjToArr(response.splitText);
+
+      const Micr_Model = {
+        name: "", 
+        codeVille: micr_result['cityCode'], 
+        codeBank: micr_result['bankCode'], 
+        numCompte24: micr_result['accountNumber'], 
+        codeCMC7: response.rawText
+      }
+
+      const micr = await MICR_RESULT.create(Micr_Model);
+
       return res.status(200).send({ result: response });
     } catch (error) {
       return res.status(500).json(error);
