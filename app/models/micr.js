@@ -12,26 +12,25 @@ const MICR_RESULT = db.define('checkData', {
     name: {
         type: Sequelize.STRING,
         allowNull: false,
+        unique: false
     },
     codeVille: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: false
     },
     codeBank: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
+        unique: false
     },
     numCompte24: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
     },
     codeCMC7: {
         type: Sequelize.STRING,
         allowNull: false,
-        unique: true
     },
     creationDate: {
         type: 'TIMESTAMP',

@@ -33,7 +33,7 @@ exports.getMicrResult = async (req, res, next) => {
       let micr_result = convertObjToArr(response.splitText);
 
       const Micr_Model = {
-        name: "", 
+        name: "somename1", 
         codeVille: micr_result['cityCode'], 
         codeBank: micr_result['bankCode'], 
         numCompte24: micr_result['accountNumber'], 

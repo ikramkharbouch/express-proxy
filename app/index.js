@@ -16,6 +16,7 @@ app.use((req, res, next) => {
 
 app.use('/micr', require('./routes/micr'))
 app.use('/checkData', require('./routes/checkData'))
+app.use('/history', require('./routes/history'))
 
 ;(async () => {
     try {
